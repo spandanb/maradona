@@ -1,8 +1,13 @@
 Maradona::Application.routes.draw do
-	root :to => "sessions#new"
+	root :to => "dashboards#show"
 	resource :session
 	match '/login' => "sessions#new", :as => "login"
 	match '/logout' => "sessions#destroy", :as => "logout"
+	
+	resource :dashboards
+	match '/main' => "dashboards#my_dashboard", :as => "main"
+	match 'profile/:id' => "dashboards#show"
+	
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

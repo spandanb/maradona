@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
                        :if => :password_required?
 
   before_save :encrypt_new_password
+  
+  has_one :profile
+  has_many :peer_requests
 
   def self.authenticate(email, password)
     user = find_by_email(email)
