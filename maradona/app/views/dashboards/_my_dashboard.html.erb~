@@ -1,0 +1,5 @@
+<p>My Email is: <%= @user.email %></p>
+<% if @profile %>
+	<p>My Name is: <%= @profile.name %></p>
+<% end %>
+<p>The current user is: <%= @current_user.email %></p>

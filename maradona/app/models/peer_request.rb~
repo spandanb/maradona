@@ -1,0 +1,3 @@
+class PeerRequest < ActiveRecord::Base
+  attr_accessible :from, :replied, :to
+end

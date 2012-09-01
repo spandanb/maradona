@@ -1,0 +1,7 @@
+<% if @my_dashboard %>
+	<%= render 'my_dashboard' %>
+<% else %>
+	<%= render 'dashboard' %>
+<% end %>	
+
+
