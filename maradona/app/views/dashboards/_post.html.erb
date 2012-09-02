@@ -1,0 +1,27 @@
+<%for el in @posts%>
+
+	<% all_replies = Post.find_all_by_reply_to_id(el.id) %>
+	<li>
+	<h1><%= el.user.profile.name %> said:
+	<br />
+	<%=el.body %></h1>
+	<%= link_to "Reply", new_post_path(:reply_to_id => el.id) %>
+
+	<% if el.user == current_user %>
+		<%= link_to 'Destroy', el, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<% end %>
+
+	<%for row in all_replies%>
+		<h3> <%=row.user.profile.name %> said: 
+		<br />
+		<%=row.body %></h1>
+		<% if row.user == current_user%>
+			<%= link_to 'Destroy', row, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% end %>
+		<h3>
+	<% end %>
+
+
+	</li>
+
+<% end %>

@@ -3,3 +3,8 @@
 	<p>My name is: <%= @profile.name %></p>
 <% end %>
 <p>The current user is: <%= @current_user.email %> (Sanity Check)</p>
+
+<ul>
+<%= render 'post' %>
+</ul>
+<%= link_to "Create a new post", new_post_path %>

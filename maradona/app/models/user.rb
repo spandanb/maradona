@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 # Need this to do mass-assignment
   attr_accessible :email, :password, :password_confirmation
   attr_accessor :password
-  
+  has_many :posts  
   validates :email, :uniqueness => true, 
                     :length => { :within => 5..50 }, 
                     :format => { :with => /^[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}$/i },

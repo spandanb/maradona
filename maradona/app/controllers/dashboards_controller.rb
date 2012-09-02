@@ -15,10 +15,13 @@ class DashboardsController < ApplicationController
 	
 	#show for current_user's dashboard
 	def my_dashboard 
-	
     @user = current_user    
     @profile = @user.profile
-    
+    @posts = @user.posts
+    #<%= all_post = Post.find_by_sql('select * from Posts')%>	
+
+
+
     respond_to do |format|
       format.html # show.html.erb
     end

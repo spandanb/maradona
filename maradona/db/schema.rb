@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901180742) do
+ActiveRecord::Schema.define(:version => 20120902022653) do
 
   create_table "peer_requests", :force => true do |t|
     t.integer  "user_id"
@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(:version => 20120901180742) do
     t.integer  "user2_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.integer  "reply_to_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "city"
+    t.string   "country"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "profiles", :force => true do |t|
