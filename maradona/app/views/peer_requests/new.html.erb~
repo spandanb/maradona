@@ -1,0 +1,5 @@
+<%= form_for([@peer_request]) do |f| %>  
+  <div class="actions">
+    <%= f.submit 'Add' %>
+  </div>
+<% end %>

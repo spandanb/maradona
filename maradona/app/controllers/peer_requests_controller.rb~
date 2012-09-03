@@ -1,15 +1,30 @@
 class PeerRequestsController < ApplicationController
 	
 	def create
-		@this_user = current_user
-    @peer_request = @this_user.peer_request.new
-    @peer_request = get_user 
+    #@peer_request = current_user.peer_requests.new
+    #@peer_request.save
+    #redirect_to :back
+    #@peer_request.to = get_user_id 
+=begin    
     if @peer_request.save
-      redirect_to @this_user, :notice => 'Your request has been sent'
+      redirect_to current_user, :notice => 'Your request has been sent'
     else
-      redirect_to @this_user, :alert => 'Unable to send your request'
+      redirect_to current_user, :alert => 'Unable to send your request'
     end
+=end
   end
+  
+  def update
+    @request = PeerRequest.find(params[:id])
+    @reply = params[:replied]
+    @request.replied = case @reply 
+    									 	when "accept" then true
+    									 	when "decline" then false
+    									 	else nil 
+    									 end
+    @request.save
+    redirect_to :back     							  
+ 	end
 
 	private
     def get_user

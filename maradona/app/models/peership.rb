@@ -4,7 +4,7 @@ class Peership < ActiveRecord::Base
 	belongs_to :user
   belongs_to :peer, :class_name => 'User', :foreign_key => 'user2_id'
 
-	def self.peership_exists?(user_id, user2_id)
+	def self.exists?(user_id, user2_id)
 		return Peership.where("(user_id = ? AND user2_id = ?) OR (user_id = ? OR user2_id = ?)", user_id, user2_id, user2_id, user_id).first
 	end
 	

@@ -1,0 +1,6 @@
+<p> Testing, in peer_requests/create.html.erb </p>
+
+
+<%= params %>
+
+<%= @peer_request %>

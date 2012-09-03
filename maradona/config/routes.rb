@@ -1,10 +1,12 @@
 Maradona::Application.routes.draw do
-	root :to => "dashboards#show"
+	root :to => "dashboards#my_dashboard"
 	resource :session
 	match '/login' => "sessions#new", :as => "login"
 	match '/logout' => "sessions#destroy", :as => "logout"
 	
-	resource :dashboards
+	resources :dashboards 
+	resources :peer_requests
+	
 	match '/main' => "dashboards#my_dashboard", :as => "main"
 	match 'profile/:id' => "dashboards#show"
 	

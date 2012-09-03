@@ -1,3 +1,17 @@
 <%= render 'dashboard' %>
 
+<%= params %>
+<%# Creates submit peer request button%>
+<% if @peer_request %>
+	<%= form_for([@peer_request]) do |f| %>  
+		<div class="actions">
+		  <%= f.submit 'Submit Peer Request' %>
+		  
+		</div>
+	<% end %>
+<% elsif @peership %>
+	<p> You are peers.</p>
+<% else %>
+	<p> Peer request has been sent; pending reply </p>
+<% end %>	
 

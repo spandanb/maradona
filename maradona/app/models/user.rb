@@ -18,7 +18,12 @@ class User < ActiveRecord::Base
   before_save :encrypt_new_password
   
   has_one :profile
+  #These are requests made by user to other users 
   has_many :peer_requests
+  has_many :subscriptions
+  
+  has_many :peerships
+  has_many :peers, :through => :peerships
 
   def self.authenticate(email, password)
     user = find_by_email(email)

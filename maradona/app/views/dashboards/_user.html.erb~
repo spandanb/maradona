@@ -1,5 +1,5 @@
 <%= div_for user do %>
-  <h2>
+  <h3>
     <%= user.email %>
-  </h2>
+  </h3>
 <% end %>

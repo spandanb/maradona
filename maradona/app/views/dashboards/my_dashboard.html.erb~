@@ -1,5 +1,10 @@
-<p>My email is: <%= @user.email %></p>
-<% if @profile %>
-	<p>My name is: <%= @profile.name %></p>
-<% end %>
-<p>The current user is: <%= @current_user.email %> (Sanity Check)</p>
+<%= render 'my_dashboard' %>
+
+<%= render 'peer_requests' %>
+
+<%= render 'my_peer' %>
+
+
+
+
+

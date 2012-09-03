@@ -1,0 +1,7 @@
+class SubscriptionsController < ApplicationController
+	
+	def create
+		redirect :back
+	end	
+	
+end
