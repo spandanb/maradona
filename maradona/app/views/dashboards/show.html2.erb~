@@ -1,0 +1,12 @@
+<%= render 'dashboard' %>
+
+
+<% if @peer_request %>
+	<%= form_for([@peer_request]) do |f| %>  
+		<div class="actions">
+		  <%= f.submit 'Submit Peer Request' %>
+		</div>
+	<% end %>
+<% else %>
+	<p> Request has been sent; pending reply </p>
+<% end %>	
