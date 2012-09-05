@@ -6,6 +6,8 @@ Maradona::Application.routes.draw do
 	
 	resources :dashboards 
 	resources :peer_requests
+	resources :posts, only: [:create, :destroy]
+
 	
 	match '/main' => "dashboards#my_dashboard", :as => "main"
 	match 'profile/:id' => "dashboards#show"

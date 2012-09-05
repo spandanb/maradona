@@ -1,3 +1,5 @@
+<h1> HIHI =>>> <%= @user.id%></h1>
+
 <%= render 'dashboard' %>
 
 <%= params %>
@@ -15,3 +17,18 @@
 	<p> Peer request has been sent; pending reply </p>
 <% end %>	
 
+<h1> wall posts</h1>
+<%= render 'shared/post_form' %>
+<% if @user.posts.any? %>
+      <h3>Wall Posts (<%= @user.posts.count %>)</h3>
+      <ol>
+        <% for el in @posts %>
+	<%= current_user.profile.name %> said:
+	<%=el.content %>
+	Posted <%= time_ago_in_words(el.created_at) %> ago.
+	<br />
+	<br />
+	<%end%>
+      </ol>
+      <%= will_paginate @posts %>
+<% end %>

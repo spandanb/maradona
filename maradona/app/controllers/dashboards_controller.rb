@@ -6,9 +6,10 @@ class DashboardsController < ApplicationController
   def show 
   	# :id is obtained from url, i.e. dashboards/1  	
 		@user = User.find(params[:id])
+		@posts = @user.posts.paginate(page: params[:page])
 		redirect_to '/main' and return if current_user.id == @user.id	
-			
-    @profile = @user.profile
+		@post = @user.posts.build if logged_in?
+    		@profile = @user.profile
     
     #Create a peer_request, unless a request alread exists from current to required user
 		#What would you see if they are pending your reply
@@ -28,9 +29,10 @@ class DashboardsController < ApplicationController
 	
     @user = current_user    
     @profile = @user.profile    
+    @posts = @user.posts.paginate(page: params[:page])
     @my_requests = PeerRequest.where(:to => @user.id)
     @peers = Peership.get_peers(@user.id)
-    
+    @post = current_user.posts.build if logged_in?
     respond_to do |format|
       format.html # show.html.erb
     end
