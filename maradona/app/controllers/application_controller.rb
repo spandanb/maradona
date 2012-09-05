@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
 			@current_user ||= User.find_by_id(session[:user_id])
 		end
 		
+#		def show_user
+#			return unless session[:user_id]
+#			@show_user ||= User.find(params[:id])
+#		end
+#		helper_method :show_user
+
+
 		# Make current_user available in templates as a helper
 		helper_method :current_user
 		
@@ -28,5 +35,21 @@ class ApplicationController < ActionController::Base
 		def access_denied
 			redirect_to login_path, :notice => "Please log in to continue" and return false
 		end
+
+
+		  def store_location
+		    session['saved_location'] = request.request_uri
+		  end
+
+		  def previous_url
+		    if session['saved_location'].nil?
+			@previous_url ||= nil 
+		    else
+			@previous_url ||= session['return-to']
+		    end
+		  end
+		helper_method :previous_url
+
+
 
 end

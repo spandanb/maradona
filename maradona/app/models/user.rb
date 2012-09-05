@@ -2,7 +2,7 @@ require 'digest'
 class User < ActiveRecord::Base
 
 # Need this to do mass-assignment
-#  attr_accessible :email, :password, :password_confirmation, :user_id,
+#  attr_accessible :email, :password, :password_confirmation, :user_id
 #  :prerequisite_attributes
   attr_accessor :password
   has_many :posts, dependent: :destroy
