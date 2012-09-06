@@ -6,22 +6,25 @@ class DashboardsController < ApplicationController
   def show 
   	# :id is obtained from url, i.e. dashboards/1  	
 		@user = User.find(params[:id])
-		@posts = @user.posts.paginate(page: params[:page])
+		#@posts = @user.posts.paginate(page: params[:page])
 
-		    @temp = Post.find_by_other_users("#{@user.id.to_s}")
-		    if @temp != nil
+		    @posts = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"user_id\" = #{@user.id} OR \"posts\".\"other_users\" = #{@user.id.to_s} ORDER BY posts.created_at DESC")
+		    #if @temp != nil
 
-			@posts.append(@temp)
-			@posts.sort!{|a,b| b[:created_at] <=> a[:created_at]}
-		    end
+		    #	@posts.append(@temp)
+#			@posts.sort!{|a,b| b[:created_at] <=> a[:created_at]}
+		    #end
 
 
 		redirect_to '/main' and return if current_user.id == @user.id	
 
-		@post = current_user.posts.build if logged_in?
+		@post = current_user.posts.build# if logged_in?
+		@reply_post = current_user.posts.build# if logged_in?
 		@post.user_id = current_user.id
 		@post.other_users = "#{@user.id.to_s}"
 
+		@reply_post.user_id = current_user.id
+		@reply_post.other_users = "#{@user.id.to_s}"
 
     		@profile = @user.profile
 
@@ -45,19 +48,15 @@ class DashboardsController < ApplicationController
     @user = current_user    
     @profile = @user.profile    
     @posts = @user.posts.paginate(page: params[:page])
- 
+    @posts = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"user_id\" = #{@user.id} OR \"posts\".\"other_users\" = #{@user.id.to_s} ORDER BY posts.created_at DESC") 
 
-    @temp = Post.find_by_other_users("#{@user.id.to_s}")
-    if @temp != nil
 
-	@posts.append(@temp)
-	@posts.sort!{|a,b| b[:created_at] <=> a[:created_at]}
-    end
+
 
 
     @my_requests = PeerRequest.where(:to => @user.id)
     @peers = Peership.get_peers(@user.id)
-    @post = current_user.posts.build if logged_in?
+    @post = current_user.posts.build# if logged_in?
 
 
 

@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :content, :location, :user_id,:other_users
+  attr_accessible :content, :location, :user_id,:other_users,:reply_id
   belongs_to :user
 
   validates :content, presence: true, length: { maximum: 250 }
