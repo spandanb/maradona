@@ -1,0 +1,43 @@
+<h1>Listing Items for sale</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Owner</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+    <td><%= item.name %></td>
+    <td><%= item.description %></td>
+    <td><%= item.price %></td>
+    <td><%= item.user.profile.name if item.user.profile %></td>
+    <td><%= link_to 'Show', item %></td>
+    <% if item.owner_id == current_user.id %>
+    	<td><%= link_to 'Edit', edit_item_path(item) %></td>
+    <% end %>
+    <%# The user should not be able to message items posted by self %>
+    <% response = item.item_responses.new(:user_id => current_user.id) %>    
+    <td><%= form_for(response) do |f| %>
+		  <div class="field">
+				<%= f.hidden_field :user_id %>
+				<%= f.hidden_field :item_id %>
+				
+				<%= f.label :message %>
+				<%= f.text_area :message, :size => "30x1"%>
+			</div>
+			<div class="actions" style="display:inline">
+		  	<%= f.submit %>
+			</div>
+		<% end %></td>	    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904024931) do
+ActiveRecord::Schema.define(:version => 20120906020310) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,23 @@ ActiveRecord::Schema.define(:version => 20120904024931) do
   create_table "groups_users", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "group_id"
+  end
+
+  create_table "item_responses", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "items", :force => true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.text     "description"
+    t.integer  "owner_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "peer_requests", :force => true do |t|

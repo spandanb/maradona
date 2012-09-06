@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   
   has_many :peerships
   has_many :peers, :through => :peerships
+  has_many :items, :foreign_key => :owner_id
 
   has_and_belongs_to_many :groups
 
