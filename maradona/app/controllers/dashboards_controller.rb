@@ -11,12 +11,14 @@ class DashboardsController < ApplicationController
     @profile = @user.profile
     
     #Create a peer_request, unless a request alread exists from current to required user
-		#What would you see if they are pending your reply
-		@peer_request = PeerRequest.new(:user_id => current_user.id, :to => @user.id) unless PeerRequest.find_by_user_id_and_to(current_user.id, @user.id)
-		 
+		@request_exists = PeerRequest.request_exists(current_user.id, @user.id)
+		
+		@peer_request = current_user.peer_requests.new(:to => @user.id) unless @request_exists
+
 		@peership = Peership.exists?(current_user.id, @user.id)
 		
-		@subscription = Subscription.create(:user_id => current_user.id, :subscribed_to => @user.id) unless Subscription.find_by_user_id_and_subscribed_to(current_user.id, @user.id)
+		@subscription = Subscription.find_by_user_id_and_subscribed_to(current_user.id, @user.id) ||
+										current_user.subscriptions.new(:subscribed_to => @user.id) 
 		
     respond_to do |format|
       format.html # show.html.erb

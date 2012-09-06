@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
   has_many :peerships
   has_many :peers, :through => :peerships
 
+  has_and_belongs_to_many :groups
+
+  
   def self.authenticate(email, password)
     user = find_by_email(email)
     return user if user && user.authenticated?(password)

@@ -1,17 +1,50 @@
 <%= render 'dashboard' %>
 
-
-<%# Creates submit peer request button%>
+<%# Creates peer request button or displays status if request pending%>
 <% if @peer_request %>
 	<%= form_for([@peer_request]) do |f| %>  
+		<div class="field">
+    	<%= f.hidden_field :to %>
+    	<%= f.hidden_field :user_id %>
+  	</div>
 		<div class="actions">
-		  <%= f.submit 'Submit Peer Request' %>
-		  
+		  <%= f.submit 'Submit Peer Request' %>		  
 		</div>
 	<% end %>
+<% elsif @request_exists == "exists" %>
+	<p> Peer request has been sent; pending reply </p>
+<% elsif @request_exists == "inv_exists" %>
+	<p> User is pending your reply </p>
 <% elsif @peership %>
 	<p> You are peers.</p>
 <% else %>
-	<p> Peer request has been sent; pending reply </p>
+	<h2> ERROR; This should not occur </h2>
+<% end %>	
+
+
+<%# Creates subscribe button%>
+<% if @subscription.new_record? %>
+	<%= form_for([@subscription]) do |f| %>  
+		<div class="field">
+    	<%= f.hidden_field :subscribed_to %>
+    	<%= f.hidden_field :user_id %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Subscribe' %>
+		</div>
+	<% end %>
+<% else %>
+	<p> You are already subscribed</p>
+	<%= form_for([@subscription]) do |f| %>  
+		<div class="field">
+    	<%= f.hidden_field :subscribed_to %>
+    	<%= f.hidden_field :user_id %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Un-subscribe' %>
+		</div>
+	<% end %>
+	
+	
 <% end %>	
 
