@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20120906020310) do
     t.datetime "updated_at",  :null => false
   end
 
+#ActiveRecord::Schema.define(:version => 20120904023246) do
+
   create_table "peer_requests", :force => true do |t|
     t.integer  "user_id"
     t.integer  "to"
@@ -55,6 +57,18 @@ ActiveRecord::Schema.define(:version => 20120906020310) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "posts", :force => true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.integer  "reply_id"
+    t.string   "other_users"
+    t.string   "location"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id_and_created_at"
 
   create_table "profiles", :force => true do |t|
     t.string   "name"

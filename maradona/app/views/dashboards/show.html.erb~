@@ -1,6 +1,12 @@
+<h1> HIHI =>>> <%= previous_url%></h1>
+
 <%= render 'dashboard' %>
 
+<<<<<<< HEAD
 <%# Creates peer request button or displays status if request pending%>
+=======
+<%# Creates submit peer request button%>
+>>>>>>> Post
 <% if @peer_request %>
 	<%= form_for([@peer_request]) do |f| %>  
 		<div class="field">
@@ -34,7 +40,7 @@
 		</div>
 	<% end %>
 <% else %>
-	<p> You are already subscribed</p>
+	<p> You are subscribed</p>
 	<%= form_for([@subscription]) do |f| %>  
 		<div class="field">
     	<%= f.hidden_field :subscribed_to %>
@@ -48,3 +54,37 @@
 	
 <% end %>	
 
+<h1> wall posts</h1>
+<%= render 'shared/post_form' %>
+<% if @user.posts.any? %>
+      <h3>Wall Posts(<%= @posts.count %>)</h3>
+      <ol>
+ 	<% @posts.each do |p|%>
+	<% if p.reply_id == nil %>
+		<%if p.user_id == @user.id%>
+			<%= @user.profile.name %> said:
+		<%else%>
+			<b> <%= User.find(p.user_id).profile.name%> </b> said:
+		<%end%>
+
+			<%=p.content %>
+			Posted <%= time_ago_in_words(p.created_at) %> ago.
+		<br />
+		<% @replies = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"reply_id\" = #{p.id.to_i} ORDER BY posts.created_at") %>
+		<%if @replies !=nil %>		
+			Comments:
+			<% @replies.each do |r|%>
+				<p> <%=User.find(r.user_id).profile.name%> said: <%= r.content%> 
+				Posted <%= time_ago_in_words(r.created_at) %> ago.</p>
+			<br />
+			<%end%>
+		<%end%>
+		<%@post.reply_id = p.id %>
+		Reply: <%= render 'shared/post_form' %>
+		<br />
+		<br />
+	
+		<% end %>
+	<%end%>
+      </ol>
+<% end %>

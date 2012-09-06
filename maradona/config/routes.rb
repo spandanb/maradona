@@ -9,9 +9,12 @@ Maradona::Application.routes.draw do
 	resources :subscriptions
 	resources :items
 	resources :item_responses
+	resources :posts, only: [:create, :destroy, :reply]
 	
 	match '/main' => "dashboards#my_dashboard", :as => "main"
 	match 'profile/:id' => "dashboards#show"
+
+	match 'reply_post' => "posts#reply"
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.
