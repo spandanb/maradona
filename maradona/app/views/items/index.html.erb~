@@ -23,7 +23,7 @@
     <%# The user should not be able to message items posted by self %>
     <% response = item.item_responses.new(:user_id => current_user.id) %>    
     <td><%= form_for(response) do |f| %>
-		  <div class="field">
+		  <div class="field" style="display:inline">
 				<%= f.hidden_field :user_id %>
 				<%= f.hidden_field :item_id %>
 				

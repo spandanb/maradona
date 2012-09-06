@@ -6,6 +6,7 @@
 #dynamic{
 	margin: 20px 20px 20px 20px;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	width: 100%;
 }
 
 .float-left{

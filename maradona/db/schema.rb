@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906020310) do
+ActiveRecord::Schema.define(:version => 20120906220724) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -40,8 +40,6 @@ ActiveRecord::Schema.define(:version => 20120906020310) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-#ActiveRecord::Schema.define(:version => 20120904023246) do
 
   create_table "peer_requests", :force => true do |t|
     t.integer  "user_id"
@@ -73,8 +71,12 @@ ActiveRecord::Schema.define(:version => 20120906020310) do
   create_table "profiles", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "institution"
+    t.integer  "class_of"
+    t.string   "department"
+    t.string   "honours"
   end
 
   create_table "sessions", :force => true do |t|

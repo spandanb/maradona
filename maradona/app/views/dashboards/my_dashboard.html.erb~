@@ -1,8 +1,49 @@
-<%= render 'my_dashboard' %>
+
+
+<%= stylesheet_link_tag "base" %>
+
+<div id="static">
+	
+	<%= render 'shared/top_menu' %>
+
+	<div id="wooden-bar">
+		<form>
+			<input id="search-form" type="text" name="search" />
+		</form>
+	</div>
+
+	<div id="profile">	
+		<div class="ym-cbox float-left inline">
+			<img id="profile-pic" src="sil.png" alt="profile img" height="105" width="105" />
+		</div>
+	
+		<div class="ym-cbox">
+			<div class="normal"><%= @user.email %></div>
+			<% if @profile %>
+				<div class="large"><%= @profile.name %></div>
+				<div ><%= @profile.honours %></div>
+				<div class="small"><%= @profile.department %></div>
+				<div>
+					<span><%= @profile.institution %></span>
+					<span class="small">(Class of <%= @profile.class_of %>)</span>
+				</div>
+			<% end %>		
+		</div>
+	</div>
+</div>
+
+<div id="dynamic">
+	<div id="feed" class="ym-g66 ym-gl">
+		<div id="post-bar">
+			<%= render 'shared/post_form' %>
+		</div>			
+		<%= render 'my_dashboard' %>
+	</div>
+</div>
 
 <%= render 'peer_requests' %>
 
-<%= render 'my_peer' %>
+<%= render 'my_peers' %>
 
 
 

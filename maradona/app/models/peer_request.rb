@@ -3,6 +3,8 @@ class PeerRequest < ActiveRecord::Base
 	
 	belongs_to :user
 	
+	#validates :check_does_not_exist
+	
 	after_save :create_peer_ship
 	
 	#Creates a peership and destroy PeerRequest object
@@ -20,6 +22,10 @@ class PeerRequest < ActiveRecord::Base
 		return "exists" if PeerRequest.find_by_user_id_and_to(user1_id, user2_id)
 		return "inv_exists" if PeerRequest.find_by_user_id_and_to(user2_id, user1_id)
 		return false
+	end
+	
+	def check_does_not_exist
+		return true if PeerRequest.request_exists(self.user_id, self.to) == false
 	end
 	
 end

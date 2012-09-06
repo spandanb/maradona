@@ -1,12 +1,9 @@
-<h1> HIHI =>>> <%= previous_url%></h1>
+
 
 <%= render 'dashboard' %>
 
-<<<<<<< HEAD
 <%# Creates peer request button or displays status if request pending%>
-=======
-<%# Creates submit peer request button%>
->>>>>>> Post
+
 <% if @peer_request %>
 	<%= form_for([@peer_request]) do |f| %>  
 		<div class="field">

@@ -1,11 +1,3 @@
-
-<p>My email is: <%= @user.email %></p>
-<% if @profile %>
-	<p>My name is: <%= @profile.name %></p>
-<% end %>
-<p>The current user is: <%= @current_user.email %> (Sanity Check)</p>
-
-<%= render 'shared/post_form' %>
 <% if @user.posts.any? %>
       <h3>Wall Posts (<%= @posts.count %>)</h3>
       <ol>
