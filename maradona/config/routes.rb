@@ -9,6 +9,7 @@ Maradona::Application.routes.draw do
 	resources :subscriptions
 	resources :items
 	resources :item_responses
+	resources :groups
 	resources :posts, only: [:create, :destroy, :reply]
 	
 	match '/main' => "dashboards#my_dashboard", :as => "main"

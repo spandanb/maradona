@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :user_id
 #  :prerequisite_attributes
   attr_accessor :password
+  
   has_many :posts, dependent: :destroy
+  
   validates :email, :uniqueness => true, 
                     :length => { :within => 5..50 }, 
                     :format => { :with => /^[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}$/i },

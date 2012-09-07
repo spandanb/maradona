@@ -1,0 +1,8 @@
+<%= render 'shared/top_menu' %>
+
+<% @groups.each do |group| %>
+	<div> <%= group.name %> </div> 
+
+<% end %>
+
+<%= link_to 'Create a New Group', new_group_path %>
