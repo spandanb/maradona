@@ -1,4 +1,4 @@
-<% if @user.posts.any? %>
+<% if @posts.any? %>
       <h3>Wall Posts (<%= @posts.count %>)</h3>
       <ol>
         <% for el in @posts %>
@@ -10,22 +10,18 @@
 			<%end%>
 			<%=el.content %>
 			Posted <%= time_ago_in_words(el.created_at) %> ago.
-			<br />
 			<% @replies = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"reply_id\" = #{el.id.to_i} ORDER BY posts.created_at") %>
-			<br />
 		<%if @replies !=nil %>		
-			Comments:
+			<br />Comments:
 			<% @replies.each do |r|%>
 				<p> <%=User.find(r.user_id).profile.name%> said: <%= r.content%> 
 				Posted <%= time_ago_in_words(r.created_at) %> ago.</p>
-			<br />
 			<%end%>
 		<%end%>
 		<%@post.reply_id = el.id %>
+		<br />Reply: <%= render 'shared/post_form' %>
 		<%end%>
-		Reply: <%= render 'shared/post_form' %>
-		<br />
-		<br />
+
 	<%end%>
       </ol>
 <% end %>
