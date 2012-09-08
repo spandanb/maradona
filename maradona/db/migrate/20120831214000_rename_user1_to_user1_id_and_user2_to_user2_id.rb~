@@ -1,0 +1,7 @@
+class RenameUser1ToUser1IdAndUser2ToUser2Id < ActiveRecord::Migration
+  def up
+  end
+
+  def down
+  end
+end

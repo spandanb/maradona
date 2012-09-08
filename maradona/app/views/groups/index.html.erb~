@@ -1,0 +1,6 @@
+<%= render 'shared/top_menu' %>
+
+<% @groups.each do |group| %>
+	<div> <%= group.name %> </div> 
+
+<% end %>

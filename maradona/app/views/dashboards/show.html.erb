@@ -1,0 +1,87 @@
+<%= render 'shared/top_menu' %>
+
+<%= render 'dashboard' %>
+
+<%# Creates peer request button or displays status if request pending%>
+
+<% if @peer_request %>
+	<%= form_for([@peer_request]) do |f| %>  
+		<div class="field">
+    	<%= f.hidden_field :to %>
+    	<%= f.hidden_field :user_id %>
+  	</div>
+		<div class="actions">
+		  <%= f.submit 'Submit Peer Request' %>		  
+		</div>
+	<% end %>
+<% elsif @request_exists == "exists" %>
+	<p> Peer request has been sent; pending reply </p>
+<% elsif @request_exists == "inv_exists" %>
+	<p> User is pending your reply </p>
+<% elsif @peership %>
+	<p> You are peers.</p>
+<% else %>
+	<h2> ERROR; This should not occur </h2>
+<% end %>	
+
+
+<%# Creates subscribe button%>
+<% if @subscription.new_record? %>
+	<%= form_for([@subscription]) do |f| %>  
+		<div class="field">
+    	<%= f.hidden_field :subscribed_to %>
+    	<%= f.hidden_field :user_id %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Subscribe' %>
+		</div>
+	<% end %>
+<% else %>
+	<p> You are subscribed</p>
+	<%= form_for([@subscription]) do |f| %>  
+		<div class="field">
+    	<%= f.hidden_field :subscribed_to %>
+    	<%= f.hidden_field :user_id %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Un-subscribe' %>
+		</div>
+	<% end %>
+	
+	
+<% end %>	
+
+<h1> wall posts</h1>
+<%= render 'shared/post_form' %>
+<% if @user.posts.any? %>
+      <h3>Wall Posts(<%= @posts.count %>)</h3>
+      <ol>
+ 	<% @posts.each do |p|%>
+	<% if p.reply_id == nil %>
+		<%if p.user_id == @user.id%>
+			<%= @user.profile.name %> said:
+		<%else%>
+			<b> <%= User.find(p.user_id).profile.name%> </b> said:
+		<%end%>
+
+			<%=p.content %>
+			Posted <%= time_ago_in_words(p.created_at) %> ago.
+		<br />
+		<% @replies = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"reply_id\" = #{p.id.to_i} ORDER BY posts.created_at") %>
+		<%if @replies !=nil %>		
+			Comments:
+			<% @replies.each do |r|%>
+				<p> <%=User.find(r.user_id).profile.name%> said: <%= r.content%> 
+				Posted <%= time_ago_in_words(r.created_at) %> ago.</p>
+			<br />
+			<%end%>
+		<%end%>
+		<%@post.reply_id = p.id %>
+		Reply: <%= render 'shared/post_form' %>
+		<br />
+		<br />
+	
+		<% end %>
+	<%end%>
+      </ol>
+<% end %>

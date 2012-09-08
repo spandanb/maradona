@@ -1,0 +1,19 @@
+<%= render 'shared/top_menu' %>
+
+<h2><%= @group.name %></h2>
+
+
+<%= form_for([@group]) do |f| %>
+	<% if @group.users.include? current_user %>
+		<div> You are a member of this group </div>
+		<div class="actions"> <%= f.submit 'Leave' %>	</div>
+	<% else %>
+		<div> You are NOT a member of this group </div>
+		<div class="actions"> <%= f.submit 'Join' %>	</div>
+	<% end %>
+<% end %>	
+
+<div> Group members: </div>
+<% @group.users.each do |member| %>
+	<div><%= member.profile.name %></div>
+<% end	%>

@@ -1,0 +1,15 @@
+<%= stylesheet_link_tag "base" %>
+
+<div id="top-menu">
+	<nav id="nav">
+		<div class ="ym-hlist">
+			<ul id="list-nav">
+				<li><a href="#">Minerwave</a></li>
+				<li><a href="/main">Home</a></li>
+				<li><a href="/marketplace">Marketplace</a></li>
+				<li><a href="/peers">Peers</a></li>
+				<li><a href="#">The Student Lounge</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>

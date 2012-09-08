@@ -1,0 +1,18 @@
+class Peership < ActiveRecord::Base
+  attr_accessible :user2_id, :user_id
+
+	belongs_to :user
+  belongs_to :peer, :class_name => 'User', :foreign_key => 'user2_id'
+
+	def self.exists?(user_id, user2_id)
+		return Peership.where("(user_id = ? AND user2_id = ?) OR (user_id = ? OR user2_id = ?)", user_id, user2_id, user2_id, user_id).first
+	end
+	
+	#returns all id of all users in peership with said user 
+	def self.get_peers(user_id) 		
+		peers = Peership.where("user_id = ?", user_id).collect{|peership| peership.user2_id}
+		peers += Peership.where("user2_id = ?", user_id).collect{|peership| peership.user_id} 
+	end		
+		
+	
+end

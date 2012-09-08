@@ -1,0 +1,7 @@
+class PeerShip < ActiveRecord::Base
+  attr_accessible :user2_id, :user_id
+
+	belongs_to :user
+  belongs_to :friend, :class_name => 'User', :foreign_key => 'user2_id'
+	
+end

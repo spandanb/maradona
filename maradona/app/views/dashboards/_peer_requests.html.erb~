@@ -1,0 +1,29 @@
+<%# Shows pending requests for you%>
+<% if @my_requests %>
+ <p>Pending requests from: </p> 
+<% end %>
+
+<% @my_requests.each do |r| %>
+	<%= User.find(r.user_id).email %>
+	
+	<%= form_for([r]) do |f| %>  
+		<div class="actions">
+		  		  
+		  <div class="field">
+    		<%= f.label "Response" %><br />
+    		
+    		<%= radio_button_tag(:replied, :accept) %>
+    		<%= label_tag(:response_accept, "Accept Request") %>
+    		
+    		<%= radio_button_tag(:replied, :decline) %>
+    		<%= label_tag(:response_decline, "Decline Request") %>
+ 
+    		<%= radio_button_tag(:replied, :no_response) %>
+    		<%= label_tag(:response_no_response, "Decide Later") %>
+  		</div>
+
+		  <%= f.submit 'Respond to Peer Request' %>
+		</div>
+	<% end %>
+<% end %>
+

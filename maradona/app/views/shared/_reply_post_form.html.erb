@@ -1,0 +1,9 @@
+<%= form_for(@reply_post) do |f| %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Compose new post..." %>
+  </div>
+  <%= f.hidden_field :other_users %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :reply_id %>
+  <%= link_to 'Submit', :controller=> 'posts', :action => 'reply' %>
+<% end %>

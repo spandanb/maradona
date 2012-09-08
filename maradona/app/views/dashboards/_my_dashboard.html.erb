@@ -1,0 +1,31 @@
+<% if @user.posts.any? %>
+      <h3>Wall Posts (<%= @posts.count %>)</h3>
+      <ol>
+        <% for el in @posts %>
+		<% if el.reply_id == nil %>
+			<%if  el.other_users == "" or el.other_users == nil%>
+				<%= current_user.profile.name %> said:
+			<%else%>
+				<b> <%= User.find(el.user_id).profile.name%> > <%= User.find("#{el.other_users}".to_i).profile.name%> </b> said:
+			<%end%>
+			<%=el.content %>
+			Posted <%= time_ago_in_words(el.created_at) %> ago.
+			<br />
+			<% @replies = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"reply_id\" = #{el.id.to_i} ORDER BY posts.created_at") %>
+			<br />
+		<%if @replies !=nil %>		
+			Comments:
+			<% @replies.each do |r|%>
+				<p> <%=User.find(r.user_id).profile.name%> said: <%= r.content%> 
+				Posted <%= time_ago_in_words(r.created_at) %> ago.</p>
+			<br />
+			<%end%>
+		<%end%>
+		<%@post.reply_id = el.id %>
+		<%end%>
+		Reply: <%= render 'shared/post_form' %>
+		<br />
+		<br />
+	<%end%>
+      </ol>
+<% end %>

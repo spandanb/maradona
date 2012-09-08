@@ -1,0 +1,9 @@
+<%= form_for(@post) do |f| %>
+  <div class="field post-form">
+    <%= f.text_area :content, placeholder: "Compose new post...", :size=>"50*1" %>
+  </div>
+  <%= f.hidden_field :other_users %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :reply_id %>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
