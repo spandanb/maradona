@@ -3,8 +3,10 @@
       <ol>
         <% for el in @posts %>
 		<% if el.reply_id == nil %>
-			<%if  el.other_users == "" or el.other_users == nil%>
+			<%if  (el.user_id == @user.id) and (el.group_id.to_i == 0) and (el.other_users == nil or el.other_users == "")%>
 				<%= current_user.profile.name %> said:
+			<%elsif(el.user_id == @user.id) and (el.group_id.to_i != 0) and (el.other_users == nil or el.other_users == "")%>
+				<b> <%= current_user.profile.name %> > <%=Group.find(el.group_id).name %> </b> said:
 			<%else%>
 				<b> <%= User.find(el.user_id).profile.name%> > <%= User.find("#{el.other_users}".to_i).profile.name%> </b> said:
 			<%end%>
