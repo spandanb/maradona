@@ -66,12 +66,18 @@
 
 			<%=p.content %>
 			Posted <%= time_ago_in_words(p.created_at) %> ago.
+			<%if p.user_id == @user.id %>
+				<%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<% end %>
 		<% @replies = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"reply_id\" = #{p.id.to_i} ORDER BY posts.created_at") %>
 		<%if @replies !=nil %>		
 			<br /> Comments:
 			<% @replies.each do |r|%>
 				<p> <%=User.find(r.user_id).profile.name%> said: <%= r.content%> 
 				Posted <%= time_ago_in_words(r.created_at) %> ago.</p>
+				<%if r.user_id == @user.id %>
+					<%= link_to 'Delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
+				<% end %>
 			<%end%>
 		<%end%>
 		<%@post.reply_id = p.id %>

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_filter  only: [:create, :destroy, :reply]
+  before_filter  only: [:create, :destroy]
 
   def create
     @post = Post.new(params[:post])
@@ -12,22 +12,19 @@ class PostsController < ApplicationController
     end
   end
 
-  def reply
-
-	@reply_post = Post.new(params[:reply_post])
-	    if @reply_post.save == true
-	      flash[:success] = "Post created!"
-	      redirect_to root_url
-#	    else
-#	      render 'dashboards/show'
-	    end
-	b = 123
-	a = File.new("/tmp/wasi","w")
-#	@post = Post.find(params[:id])
-	a.write("#{b.to_s}")
-	a.close
-  end
 
   def destroy
+    @post = Post.find(params[:id])
+    @reply_post = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"reply_id\" = #{@post.id}")
+
+    for row in @reply_post
+	row.delete
+    end
+
+    @post.destroy
+
+
+    redirect_to root_url
+
   end
 end
