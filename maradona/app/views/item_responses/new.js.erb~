@@ -1,0 +1,4 @@
+$("<%= escape_javascript
+render(render :partial => 'item_responses/form', :locals => { :item => @item }) %>").insertAfter('#new_item_response_link');
+$('#new_item_response_link').hide();
+

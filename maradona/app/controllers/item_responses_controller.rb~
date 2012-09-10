@@ -1,8 +1,14 @@
 class ItemResponsesController < ApplicationController
 
 	def create
-		@item_response = Item.new(params[:item_response])
+		@item_response = ItemResponse.new(params[:item_response])
 		@item_response.save
 		redirect_to :back
 	end
+	
+	def new
+		@item = Item.new
+		@item.owner_id = current_user.id
+	end
+	
 end

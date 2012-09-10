@@ -3,4 +3,6 @@ class ItemResponse < ActiveRecord::Base
 	
 	belongs_to :item
 	
+	validates :message, :length => {:minimum => 1}
+	
 end

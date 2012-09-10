@@ -59,7 +59,7 @@ class DashboardsController < ApplicationController
     end
   end
   
-  def peer 
+  def peers_page 
   	@user = current_user
   	@my_requests = PeerRequest.where(:to => @user.id)
     @peers = Peership.get_peers(@user.id)

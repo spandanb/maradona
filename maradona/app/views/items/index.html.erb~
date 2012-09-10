@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "base" %>
 <%= render 'shared/top_menu' %>
 
 <h1>Listing Items for sale</h1>
@@ -18,25 +17,16 @@
     <td><%= item.name %></td>
     <td><%= item.description %></td>
     <td><%= item.price %></td>
-    <td><%= item.user.profile.name if item.user.profile %></td>
+    <td><%= item.user.profile.name if item.user.profile if item.user %></td>
     <td><%= link_to 'Show', item %></td>
-    <% if item.owner_id == current_user.id %>
+    <% if item.owner_id == current_user.id if current_user %>
     	<td><%= link_to 'Edit', edit_item_path(item) %></td>
     <% end %>
-    <%# The user should not be able to message items posted by self %>
-    <% response = item.item_responses.new(:user_id => current_user.id) %>    
-    <td><%= form_for(response) do |f| %>
-		  <div class="field" style="display:inline">
-				<%= f.hidden_field :user_id %>
-				<%= f.hidden_field :item_id %>
-				
-				<%= f.label :message %>
-				<%= f.text_area :message, :size => "30x1"%>
-			</div>
-			<div class="actions" style="display:inline">
-		  	<%= f.submit %>
-			</div>
-		<% end %></td>	    
+    <%# The user should not be able to message items posted by self %>   
+    <td>
+			<%# render :partial => 'item_responses/form', :locals => { :item => item }%>
+			<%= render :file => 'item_responses/new', :locals => { :@item => item }%>
+		</td>	    
   </tr>
 <% end %>
 </table>

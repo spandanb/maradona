@@ -1,0 +1,13 @@
+<%= form_for([@item, @item.item_responses.new(:user_id => current_user.id)]) do |f| %>
+	<div class="field" style="display:inline">
+		<%= f.hidden_field :user_id %>
+		<%= f.hidden_field :item_id %>
+
+		<%= f.label :message %>
+		<%= f.text_area :message, :size => "30x1"%>
+
+	</div>
+	<div class="actions" style="display:inline">
+		<%= f.submit %>
+	</div>
+<% end %>

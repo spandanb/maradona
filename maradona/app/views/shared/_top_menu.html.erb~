@@ -8,7 +8,8 @@
 				<li><a href="/main">Home</a></li>
 				<li><a href="/marketplace">Marketplace</a></li>
 				<li><a href="/peers">Peers</a></li>
-				<li><a href="#">The Student Lounge</a></li>
+				<li><a href="/groups">Groups</a></li>
+				<li><a href="/Logout">Logout</a></li>
 			</ul>
 		</div>
 	</nav>

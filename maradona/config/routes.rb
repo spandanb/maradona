@@ -7,8 +7,9 @@ Maradona::Application.routes.draw do
 	resources :dashboards 
 	resources :peer_requests
 	resources :subscriptions
-	resources :items
-	resources :item_responses
+	resources :items do
+		resources :item_responses
+	end
 	resources :groups
 	resources :posts, only: [:create, :destroy, :reply]
 	

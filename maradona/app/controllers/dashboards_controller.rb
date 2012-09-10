@@ -1,8 +1,7 @@
 class DashboardsController < ApplicationController
 	#Only authenticated users can view dashboard
 	before_filter :authenticate
-		
-  
+		  
   def show 
   	# :id is obtained from url, i.e. dashboards/1  	
 		@user = User.find(params[:id])

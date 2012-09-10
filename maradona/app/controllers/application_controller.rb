@@ -36,7 +36,6 @@ class ApplicationController < ActionController::Base
 			redirect_to login_path, :notice => "Please log in to continue" and return false
 		end
 
-
 		  def store_location
 		    session['saved_location'] = request.request_uri
 		  end
@@ -49,7 +48,5 @@ class ApplicationController < ActionController::Base
 		    end
 		  end
 		helper_method :previous_url
-
-
 
 end

@@ -5,4 +5,5 @@ class ItemResponsesController < ApplicationController
 		@item_response.save
 		redirect_to :back
 	end
+		
 end
