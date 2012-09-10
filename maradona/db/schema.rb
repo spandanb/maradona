@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906220724) do
+ActiveRecord::Schema.define(:version => 20120909221340) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120906220724) do
     t.string   "location"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "group_id"
   end
 
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id_and_created_at"
