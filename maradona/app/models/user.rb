@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   
   has_many :posts, dependent: :destroy
-  has_many_attached_file :photo,
+  has_attached_file :photo,
        :styles => {
        :thumb=> "100x100#",
        :small  => "400x400>" }
