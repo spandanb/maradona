@@ -1,4 +1,15 @@
 GIT
+  remote: http://github.com/thoughtbot/paperclip.git
+  revision: 7f8a1a093d660ed197c0a510dd1a71d05fb14522
+  specs:
+    paperclip (3.2.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (>= 0.0.2)
+      mime-types
+
+GIT
   remote: https://github.com/p7r/will_paginate.git
   revision: 53d1da6da003dc172ee054e4cc416d0723f00b88
   branch: rails3
@@ -37,6 +48,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.0)
+    cocaine (0.3.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -116,6 +128,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   execjs
   jquery-rails
+  paperclip!
   rails (= 3.2.8)
   sass-rails (~> 3.2.3)
   sqlite3

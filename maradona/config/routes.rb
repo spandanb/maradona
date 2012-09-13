@@ -3,7 +3,8 @@ Maradona::Application.routes.draw do
 	resource :session
 	match '/login' => "sessions#new", :as => "login"
 	match '/logout' => "sessions#destroy", :as => "logout"
-	
+
+	resources :users
 	resources :dashboards 
 	resources :peer_requests
 	resources :subscriptions
@@ -11,6 +12,7 @@ Maradona::Application.routes.draw do
 	resources :item_responses
 	resources :groups
 	resources :posts, only: [:create, :destroy, :reply]
+
 	
 	match '/main' => "dashboards#my_dashboard", :as => "main"
 	match 'profile/:id' => "dashboards#show"
@@ -18,7 +20,7 @@ Maradona::Application.routes.draw do
 	match 'reply_post' => "posts#reply"
 	match '/marketplace' => "items#index"
 	match 'peers' => "dashboards#peers_page"
-	
+	match '/sign_up' => "users#new"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

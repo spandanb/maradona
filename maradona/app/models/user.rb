@@ -2,12 +2,16 @@ require 'digest'
 class User < ActiveRecord::Base
 
 # Need this to do mass-assignment
-  attr_accessible :email, :password, :password_confirmation, :user_id
+  attr_accessible :email, :password, :password_confirmation, :user_id, :photo
 #  :prerequisite_attributes
   attr_accessor :password
   
   has_many :posts, dependent: :destroy
-  
+  has_many_attached_file :photo,
+       :styles => {
+       :thumb=> "100x100#",
+       :small  => "400x400>" }
+
   validates :email, :uniqueness => true, 
                     :length => { :within => 5..50 }, 
                     :format => { :with => /^[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}$/i },
