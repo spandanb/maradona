@@ -1,6 +1,11 @@
 <%= render 'shared/top_menu' %>
 
 <% @groups.each do |group| %>
-	<div> <%= group.name %> </div> 
-
+	<div> 
+		<%= group.name %> 
+		<%= link_to 'Go', group %>
+	</div> 
+	
 <% end %>
+
+<%= link_to 'Create a New Group', new_group_path %>

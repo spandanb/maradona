@@ -15,7 +15,7 @@
 
 <div> Group members: </div>
 <% @group.users.each do |member| %>
-	<div><%= member.profile.name %></div>
+	<div><%= member.profile.name if member.profile %></div>
 <% end	%>
 
 <%= render 'shared/post_form' %>

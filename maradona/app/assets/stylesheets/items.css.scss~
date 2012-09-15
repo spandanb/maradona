@@ -17,7 +17,6 @@
 .header{
 	 width: 100%;
 	 display: block;
-	 overflow: overlay;
 	 background-color: #246d62;
 }
 

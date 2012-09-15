@@ -2,6 +2,9 @@ class Group < ActiveRecord::Base
   attr_accessible :name
 	
 	has_and_belongs_to_many :users
-
+	
+	validates :name, :uniqueness => true,
+									 :length => { :within => 5..50 },
+									 :presence => true
 
 end

@@ -1,0 +1,52 @@
+<%= render 'shared/top_menu' %>
+
+<h1>Listing Items for sale</h1>
+
+<%= javascript_include_tag :items_index %>
+
+<%= link_to 'New Item', new_item_path %>
+
+<%= link_to_function "Greeting", "alert('Hello world!')", :class => "nav_link" %>
+
+
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Contact</th>
+  </tr>
+
+<% @items.each do |item| %>
+  
+  <tr>
+    <td><%= item.name %></td>
+    <td><%= item.price %></td>
+    <td>
+    	<% if item.owner_id != current_user.id %>
+			<button id="Contact" type="button">
+					Contact <%= item.user.profile.name if item.user.profile if item.user %>		    
+			</button>
+		<% else %>
+			<%= link_to 'Edit', edit_item_path(item) %>
+		<% end %>
+    </td>
+  </tr>   
+  <tr>    
+    <td>
+    	<%= item.description[0,50] %> 
+    	<%= "..." %>
+     	<%= link_to('See more', item) if item.description.length > 50 %>   		
+    </td>
+  </tr>
+  <tr>
+    <td>
+			<%# render :partial => 'item_responses/form', :locals => { :item => item }%>
+			<%= render :file => 'item_responses/new', :locals => { :@item => item }%>
+	</td>	    
+  </tr>
+ <% end %>
+</table>
+
+
+

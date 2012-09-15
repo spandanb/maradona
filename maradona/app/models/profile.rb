@@ -1,5 +1,7 @@
 class Profile < ActiveRecord::Base
-  attr_accessible :name,:user_id
+  attr_accessible :name,:user_id, :class_of, :institution, :department, :honours
+  #attr_accessor :name, :class_of, :institution, :department, :honours
+  
   belongs_to :user
   
   validates :class_of, :inclusion => 2000..2030 

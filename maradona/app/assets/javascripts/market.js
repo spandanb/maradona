@@ -1,0 +1,13 @@
+$(document).ready(function() {
+		
+	//hide all repsonse forms
+	//$('.response-form').css('display','none');
+	
+	//when a contact button is clicked
+	$('.contact-button').bind('click', function(event){
+		
+		console.log($(this).attr("id") );
+		//console.log(this.parent.attr('id'));
+	});
+
+});

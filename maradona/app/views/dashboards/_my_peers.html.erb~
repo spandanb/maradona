@@ -1,0 +1,5 @@
+<h2> My Peers: </h2>
+<% @peers.each do |p| %>
+	<%= link_to User.find(p).email, 'profile/' + p =%>
+<% end %>
+

@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 	
 	def index
     @items = Item.all
+    #@responses is unneccessary, remove it
     @responses = @items.collect{|item| item.item_responses.new(:user_id => current_user)}
  		
  	end
@@ -19,8 +20,13 @@ class ItemsController < ApplicationController
 	
 	def create
 	  @item = Item.new(params[:item])
-		@item.save
-		redirect_to items_path
+
+    if @item.save
+       redirect_to items_path, :notice => 'Article was successfully created.'
+    else
+      render :action => "new"
+    end
+		
 	end
 	
 	def edit

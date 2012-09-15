@@ -2,35 +2,72 @@
 
 <h1>Listing Items for sale</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Owner</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @items.each do |item| %>
-  <tr>
-    <td><%= item.name %></td>
-    <td><%= item.description %></td>
-    <td><%= item.price %></td>
-    <td><%= item.user.profile.name if item.user.profile if item.user %></td>
-    <td><%= link_to 'Show', item %></td>
-    <% if item.owner_id == current_user.id if current_user %>
-    	<td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <% end %>
-    <%# The user should not be able to message items posted by self %>   
-    <td>
-			<%# render :partial => 'item_responses/form', :locals => { :item => item }%>
-			<%= render :file => 'item_responses/new', :locals => { :@item => item }%>
-		</td>	    
-  </tr>
-<% end %>
-</table>
-
-<br />
+<%= javascript_include_tag :items_index %>
+<%= javascript_include_tag :market %>
 
 <%= link_to 'New Item', new_item_path %>
+
+<%= link_to_function "Greeting", "alert('Hello world!')", :class => "nav_link" %>
+
+<div id="item-list">
+  <div class="header" >
+    <div class="header-item" >Name</div>
+    <div class="header-item" >Price</div>
+    <div class="header-item" >Contact</div>
+  </div>
+	<% counter = 0 %>
+	
+	<% @items.each do |item| %>
+		
+		<div class="item-wrapper zebra-<%= counter%2 %>">
+			
+			<div class ="top">
+			  <div class="item-col"><%= item.name %></div>
+		  	<div class="item-col"><%= item.price %></div>
+		  	<div class="item-col">
+		  		<% if item.owner_id != current_user.id %>
+						<button id="contact-<%= counter %>" type="button" class="inline contact-button button-response-<%= counter %>">
+							Contact <%= item.user.profile.name if item.user.profile if item.user %>		    
+						</button>
+					<% else %>
+						<div > <%= link_to 'Edit', edit_item_path(item) %> </div>
+					<% end %>
+		  	</div>
+			</div>   
+		
+		  <div class="middle">
+		  	<%= item.description[0,150] %> 
+		  	<% if item.description.length > 150 %>
+		  		<%= "..."  %>
+		   		<%= link_to('See more', item) %> 
+		   	<% end %>	  		
+		  </div>
+		
+			<div class="bottom">
+				<div id="response-form-<%= counter %>" class="response-form button-response-<%= counter %>" >
+					<%# render :partial => 'item_responses/form', :locals => { :item => item }%>
+					<%= render :file => 'item_responses/new', :locals => { :@item => item }%>
+				</div>
+			</div>	    
+		</div>
+		<% counter += 1	%>			
+  <% end %>
+</div>
+
+<div> My Responses: </div>
+<div id="my-responses">
+	<% my_items_ids = Item.where(:owner_id => current_user.id).collect{|item| item.id} %>
+	<% my_items_ids.each do |iid| %>
+		<% ItemResponse.where(:item_id => iid).each do |res| %>
+			<li> <%= res.message %></li>
+		<% end %>
+	<% end %>
+	<%# my_responses = ItemResponse.where
+	item_item_response_pair = ItemResponse.all.collect{|item_response| [item_response.item_id, item_response.id]}
+	items = Item.find(item_item_response_pair.collect{|item_pair| item_pair[0]}
+	User.find(items.collect{|item| item.owner_id})
+
+	 ItemResponse.where()each do |ir| %>
+	
+</div>
+

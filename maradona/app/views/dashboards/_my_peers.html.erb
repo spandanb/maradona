@@ -1,5 +1,5 @@
 <h2> My Peers: </h2>
 <% @peers.each do |p| %>
-	<%= User.find(p).email =%>
+	<%= link_to User.find(p).email, 'profile/' + String(p) =%>
 <% end %>
 

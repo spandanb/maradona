@@ -33,12 +33,24 @@
 </div>
 
 <div id="dynamic">
-	<div id="feed" class="ym-g66 ym-gl">
-		<div id="post-bar">
-			<%= render 'shared/post_form' %>
-		</div>			
+	<div id="feed">
+		<div id="top-bar">
+			<div id="news-text" class="inline float-left">
+				<span> News </span> <span> | </span>       
+			</div>
+			<div id="post-bar" class="ym-gbox inline float-right">
+				<%= render 'shared/post_form' %>
+			</div>			
+		</div>		
 		<%= render 'my_dashboard' %>
 	</div>
+	
+	<div id="right-sidebar">
+		<div class="ym-gbox">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		</div>
+	</div>
+	
 </div>
 
 
