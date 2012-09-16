@@ -52,7 +52,8 @@ class DashboardsController < ApplicationController
     @posts = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"user_id\" = #{@user.id} OR \"posts\".\"other_users\" = #{@user.id.to_s} ORDER BY posts.created_at DESC") 
     
     @post = current_user.posts.build# if logged_in?
-    
+    @reply = @post.reply.build
+    @reply.user_id = @user.id
     respond_to do |format|
       format.html # show.html.erb
     end

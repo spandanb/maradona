@@ -2,35 +2,44 @@
       <h3>Wall Posts (<%= @posts.count %>)</h3>
       <ol>
         <% for el in @posts %>
-		<% if el.reply_id == nil %>
-			<%if  (el.user_id == @user.id) and (el.group_id.to_i == 0) and (el.other_users == nil or el.other_users == "")%>
-				<%= current_user.profile.name %> said:
-			<%elsif(el.user_id == @user.id) and (el.group_id.to_i != 0) and (el.other_users == nil or el.other_users == "")%>
-				<b> <%= current_user.profile.name %> > <%=Group.find(el.group_id).name %> </b> said:
-			<%else%>
-				<b> <%= User.find(el.user_id).profile.name%> > <%= User.find("#{el.other_users}".to_i).profile.name%> </b> said:
-			<%end%>
-			<%=el.content %>
-			Posted <%= time_ago_in_words(el.created_at) %> ago.
-			<%if el.user_id == @user.id %>
-				<%= link_to 'Delete', el, method: :delete, data: { confirm: 'Are you sure?' } %>
-			<% end %>
-			<% @replies = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"reply_id\" = #{el.id.to_i} ORDER BY posts.created_at") %>
-		<%if @replies !=nil %>		
+		
+		<%if  (el.user_id == @user.id) and (el.group_id.to_i == 0) and (el.other_users == nil or el.other_users == "")%>
+			<%= current_user.profile.name %> said:
+		<%elsif(el.user_id == @user.id) and (el.group_id.to_i != 0) and (el.other_users == nil or el.other_users == "")%>
+			<b> <%= current_user.profile.name %> > <%=Group.find(el.group_id).name %> </b> said:
+		<%else%>
+			<b> <%= User.find(el.user_id).profile.name%> > <%= User.find("#{el.other_users}".to_i).profile.name%> </b> said:
+		<%end%>
+		<%=el.content %>
+		Posted <%= time_ago_in_words(el.created_at) %> ago.
+		<%if el.user_id == @user.id %>
+			<%= link_to 'Delete', el, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% end %>
+		<% @replies = el.reply %>
+			<%if @replies !=nil %>		
 			<br />Comments:
+			<br />
 			<% @replies.each do |r|%>
 				<p> <%=User.find(r.user_id).profile.name%> said: <%= r.content%> 
 				Posted <%= time_ago_in_words(r.created_at) %> ago.</p>
 				<%if r.user_id == @user.id %>
-					<%= link_to 'Delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
-				<% end %>
+				<%= link_to 'Delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
+				<%@reply.reply_id = r.id %>
+				<b>Reply</b>: <%= render 'shared/reply_form' %>
+
+			<% end %>
 
 			<%end%>
+			<div id="post-bar" class="ym-gbox inline float-right">
+				<% @reply = el.reply.build%>
+				<% @reply.user_id = el.user_id%>
+				<% @reply.post_id = el.id%>
+				<%= render 'shared/reply_form' %>
+			</div>			
+			<br><br>
+			<br><br>
 		<%end%>
-		<%@post.reply_id = el.id %>
-		<br />Reply: <%= render 'shared/post_form' %>
-		<%end%>
-
+				<br><br>
 	<%end%>
       </ol>
 <% end %>

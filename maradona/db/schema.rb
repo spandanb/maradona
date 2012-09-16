@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909221340) do
+ActiveRecord::Schema.define(:version => 20120916234612) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -80,6 +80,17 @@ ActiveRecord::Schema.define(:version => 20120909221340) do
     t.string   "honours"
   end
 
+  create_table "replies", :force => true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "reply_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "replies", ["user_id", "created_at"], :name => "index_replies_on_user_id_and_created_at"
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -95,6 +106,12 @@ ActiveRecord::Schema.define(:version => 20120909221340) do
     t.integer  "subscribed_to"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "tag"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

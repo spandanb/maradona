@@ -1,4 +1,6 @@
 Maradona::Application.routes.draw do
+  resources :replies
+
 	root :to => "dashboards#my_dashboard"
 	resource :session
 	match '/login' => "sessions#new", :as => "login"
