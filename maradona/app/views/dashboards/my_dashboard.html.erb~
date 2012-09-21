@@ -1,6 +1,7 @@
 
 
 <%= stylesheet_link_tag "base" %>
+<%= javascript_include_tag :move_arrow %>
 
 <div id="static">
 	
@@ -36,7 +37,7 @@
 	<div id="feed">
 		<div id="top-bar">
 			<div id="news-text" class="inline float-left">
-				<span> News </span> <span> x|x </span>       
+				<span> News </span> <span> | </span>       
 			</div>
 			<div id="post-bar" class="ym-gbox inline float-right">
 				<%= render 'shared/post_form' %>
@@ -46,9 +47,43 @@
 	</div>
 	
 	<div id="right-sidebar">
-		<div class="ym-gbox">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		<div id="right-sidebar-menu">
+			<div class="inl right-sidebar-menu-item"> 
+				<%= image_tag("excl.png", alt: "", id: "excl", class: "right-sidebar-menu-img") %> 
+			</div>
+			<div class="inl right-sidebar-menu-item">				
+				<%= image_tag("check.png", alt: "", id: "check", :class=> "right-sidebar-menu-img") %> 
+			</div>
+			<div class="inl right-sidebar-menu-item"> 
+				<%= image_tag("four.png", alt: "", id: "four", class: "right-sidebar-menu-img") %> 
+			</div>
+			<div class="inl right-sidebar-menu-item"> 
+				<%= image_tag("thought.png", alt: "", id: "thought", class: "right-sidebar-menu-img") %> 
+			</div>
+			<div class="inl right-sidebar-menu-item"> 
+				<%= image_tag("note.png", alt: "", id: "note", class: "right-sidebar-menu-img") %>
+			</div>
+			<div class="inl right-sidebar-menu-item">
+				<%= image_tag("plus.png", :alt => "", id:"plus", class: "right-sidebar-menu-img") %>
+		  </div>
 		</div>
+		
+		<div id="arrow-up" class="arrow-up"> </div> 
+		
+		<div class="ym-gbox">
+			<div class="divider">General </div>
+		</div>
+		<div id="peer-request-wrapper" class="ym-gbox">
+			<%= render 'peer_requests' %>
+		</div>		
+		<div class="ym-gbox">
+			<div class="divider">Event Requests </div>
+		</div>		
+	</div>
+	
+	<div id="interest-sidebar">
+		Praesent tempus volutpat nunc quis congue. In hac habitasse platea dictumst. Donec risus eros, molestie ac eleifend a, ornare vitae lectus. Phasellus id justo facilisis felis vulputate semper. Quisque tempor tincidunt eros eget facilisis. Integer est lorem, porta nec porttitor ac, cursus a enim. Aenean at euismod velit.
+	
 	</div>
 	
 </div>

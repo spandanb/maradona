@@ -15,13 +15,14 @@
 
 <div>
 			<%# Both the following have the same effect %>
-			<%# render :file => 'item_responses/new' %>
+			<%= render :file => 'item_responses/new' %>
 			<%# render :partial => 'item_responses/form', :locals => { :item => @item }%>	
 			<%# The hash for :locals variable in partial maps to variable in existing file %>	
 			
-			<%= link_to "new message", new_item_item_response_path(@item, :format => :js), :remote => true, :id => 'new_item_response_link' %>
+			<%# link_to "new message", new_item_item_response_path(@item, :format => :js), :remote => true, :id => 'new_item_response_link' %>
 			
-			<%# render :file => 'item_responses/new.html.erb', :locals => { :@item => item }%>
+
+			<%# render :file => 'item_responses/new', :locals => { :@item => item }%>
 			<%# link_to "new message", new_article_comment_path(@article, :format => :js), :remote => true, :id => 'new_comment_link' %>
 
 				

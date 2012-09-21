@@ -1,0 +1,38 @@
+li a{
+	font-weight: bold;
+	color: #7ea29d;
+}
+
+#name-logo{
+	border-right: 1px solid #7ea29d;
+}
+
+a:link {
+	text-decoration:none;
+}
+
+#nav a:active {
+	/* background:#e35a00; */
+	#color:#47635f; 
+	font-weight: bolder;
+}
+
+#nav a:hover{
+	text-decoration:underline;
+}
+
+
+#top-menu{
+
+	
+	#list{
+		margin: 0;
+		overflow: overlay;
+	
+		li{
+			display: inline;
+			float: left;
+			padding: 10px 70px 10px 10px;
+		}
+	}
+}

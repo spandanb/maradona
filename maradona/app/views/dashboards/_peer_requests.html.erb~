@@ -1,29 +1,39 @@
 <%# Shows pending requests for you%>
 <% if @my_requests %>
- <p>Pending requests from: </p> 
-<% end %>
+ <div>Peer Requests </div> 
 
-<% @my_requests.each do |r| %>
-	<%= User.find(r.user_id).email %>
-	
-	<%= form_for([r]) do |f| %>  
-		<div class="actions">
-		  		  
-		  <div class="field">
-    		<%= f.label "Response" %><br />
-    		
-    		<%= radio_button_tag(:replied, :accept) %>
-    		<%= label_tag(:response_accept, "Accept Request") %>
-    		
-    		<%= radio_button_tag(:replied, :decline) %>
-    		<%= label_tag(:response_decline, "Decline Request") %>
- 
-    		<%= radio_button_tag(:replied, :no_response) %>
-    		<%= label_tag(:response_no_response, "Decide Later") %>
-  		</div>
-
-		  <%= f.submit 'Respond to Peer Request' %>
+	<% @my_requests.each do |r| %>
+		<% u = User.find(r.user_id) %>
+		<div class="request"> 
+			<span class="requesting-user"> 
+				<%= u.profile.name if u.profile || u.email %>
+			</span>
+			<span>
+				wants to add you as peer.
+			</span>
 		</div>
+		
+		<%= form_for([r]) do |f| %>  
+				<div class="field">
+					<%= f.hidden_field :user_id %>
+					<%= f.hidden_field :to %>
+					<%= f.hidden_field :replied %>    		
+				</div>
+				<div class="action">
+					<%= f.submit 'Accept', :class=>"accept-btn" %>
+				</div>
+		<% end %>
+	
+		<%= form_for([r]) do |f| %>  
+				<div class="field">
+					<%= f.hidden_field :user_id %>
+					<%= f.hidden_field :to %>
+					<%= f.hidden_field :replied %>    		
+				</div>
+				<div class="action">
+					<%= f.submit 'Decline', :class=>"decline-btn" %>
+				</div>
+		<% end %>
+	
 	<% end %>
 <% end %>
-

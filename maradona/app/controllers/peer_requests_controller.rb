@@ -2,7 +2,6 @@ class PeerRequestsController < ApplicationController
 	
 	def create
     @peer_request = PeerRequest.new(params[:peer_request])#current_user.peer_requests.new
-    @peer_request.save
 
     if @peer_request.save
       redirect_to :back, :notice => 'Your request has been sent'
@@ -14,10 +13,9 @@ class PeerRequestsController < ApplicationController
   
   def update
     @request = PeerRequest.find(params[:id])
-    @reply = params[:replied]
-    @request.replied = case @reply 
-    									 	when "accept" then true
-    									 	when "decline" then false
+    @request.replied = case params[:commit] 
+    									 	when "Accept" then true
+    									 	when "Decline" then false
     									 	else nil 
     									 end
     @request.save

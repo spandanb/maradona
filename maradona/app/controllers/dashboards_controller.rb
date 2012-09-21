@@ -52,6 +52,7 @@ class DashboardsController < ApplicationController
     @posts = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"user_id\" = #{@user.id} OR \"posts\".\"other_users\" = #{@user.id.to_s} ORDER BY posts.created_at DESC") 
     
     @post = current_user.posts.build# if logged_in?
+    @my_requests = PeerRequest.where(:to => @user.id)[0,6]
     
     respond_to do |format|
       format.html # show.html.erb
@@ -60,7 +61,14 @@ class DashboardsController < ApplicationController
   
   def peers_page 
   	@user = current_user
+  	#The following can be optimized
   	@my_requests = PeerRequest.where(:to => @user.id)
+=begin  	
+  	.collect{|req| 
+  		{accept: PeerRequest.new(user_id: req.user_id, to: req.to, replied: true), 
+  		decline: PeerRequest.new(user_id: req.user_id, to: req.to, replied: false)}
+  	}
+=end
     @peers = Peership.get_peers(@user.id)
   	  	
   end

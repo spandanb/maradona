@@ -37,7 +37,8 @@
 		
 		  <div class="middle">
 		  	<%= item.description[0,150] %> 
-		  	<% if item.description.length > 150 %>
+		  	<%# if item.description.length > 150 %>
+		  	<% if true %>
 		  		<%= "..."  %>
 		   		<%= link_to('See more', item) %> 
 		   	<% end %>	  		

@@ -1,2 +1,5 @@
 <p> In peer_requests/create.html.erb </p>
 
+<%= @peer_request.inspect %>
+
+

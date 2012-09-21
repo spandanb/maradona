@@ -44,10 +44,12 @@
 		  </div>
 		
 			<div class="bottom">
-				<div id="response-form-<%= counter %>" class="response-form button-response-<%= counter %>" >
-					<%# render :partial => 'item_responses/form', :locals => { :item => item }%>
-					<%= render :file => 'item_responses/new', :locals => { :@item => item }%>
-				</div>
+				<% if item.owner_id != current_user.id %>
+					<div id="response-form-<%= counter %>" class="response-form button-response-<%= counter %>" >
+						<%# render :partial => 'item_responses/form', :locals => { :item => item }%>
+						<%= render :file => 'item_responses/new', :locals => { :@item => item }%>
+					</div>
+				<% end %>
 			</div>	    
 		</div>
 		<% counter += 1	%>			

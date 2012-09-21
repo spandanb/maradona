@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag "base" %>
-
 <%= render 'shared/top_menu' %>
 
 <%= render 'peer_requests' %>
