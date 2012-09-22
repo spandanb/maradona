@@ -1,3 +1,26 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" type="text/javascript"><!--mce:0--></script>
+<script type="text/javascript">
+$(document).ready(function(){
+//Hide the tooglebox when page load
+$(".togglebox").hide();
+//slide up and down when click over heading 2
+$("h77").click(function(){
+// slide toggle effect set to slow you can set it to fast too.
+$(this).next(".togglebox").slideToggle("slow");
+return true;
+});
+});
+</script>
+
+<h77>Reply</h77>
+<div class="togglebox">
+<div class="content">
+<h3>Content Here</h3>
+<!--Content Here--></div>
+</div>
+
+<h1> <br><br><br><br>TESTS <br><br><br><br></h1>
+
 <% if @posts.any? %>
       <h3>Wall Posts (<%= @posts.count %>)</h3>
       <ol>
@@ -15,7 +38,7 @@
 		<%if el.user_id == @user.id %>
 			<%= link_to 'Delete', el, method: :delete, data: { confirm: 'Are you sure?' } %>
 		<% end %>
-		<% @replies = el.reply %>
+		<% @replies = el.reply.reverse %>
 			<%if @replies !=nil %>		
 			<br />Comments:
 			<br />
@@ -25,17 +48,24 @@
 				<%if r.user_id == @user.id %>
 				<%= link_to 'Delete', r, method: :delete, data: { confirm: 'Are you sure?' } %>
 				<%@reply.reply_id = r.id %>
-				<b>Reply</b>: <%= render 'shared/reply_form' %>
+<!--				<b>Reply</b>: <%= render 'shared/reply_form' %>-->
 
 			<% end %>
 
 			<%end%>
-			<div id="post-bar" class="ym-gbox inline float-right">
+			<br> <br>
+			<h77>Reply</h77>
+			<div class="togglebox">
+			<div class="content">
+			<div id="reply-bar" class="ym-gbox inline float-right">
 				<% @reply = el.reply.build%>
 				<% @reply.user_id = el.user_id%>
 				<% @reply.post_id = el.id%>
 				<%= render 'shared/reply_form' %>
 			</div>			
+			<!--Content Here--></div>
+			</div>
+			
 			<br><br>
 			<br><br>
 		<%end%>
