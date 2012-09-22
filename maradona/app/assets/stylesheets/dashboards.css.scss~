@@ -66,6 +66,16 @@ body{
 		border: solid 1px #C9C9C9;
 		padding: 10px 0;
 		margin: 10px 0 0 0;
+		
+		#header{
+			overflow: overlay;
+			background-color: #DADADA;
+			#text{
+				font-size: 24px;
+				/*padding-left: 20px; */
+				margin: auto;
+			}
+		}
 	}	
 }
 
@@ -76,7 +86,7 @@ body{
 	border-right: 8px solid transparent;	
 	border-bottom: 8px solid #DADADA;
 	position: relative; 
-	top: -17px;
+	top: -18px;
 	left: 26px; 
 }
 
@@ -87,13 +97,18 @@ body{
 	border-right: 8px solid transparent;	
 	border-bottom: 8px solid #FFFFFF;
 	position: relative; 
-	top: -23px;
+	top: -24px;
 	left: 26px; 
 }
 
 
 .inl{
 	float: left;
+	display: inline;
+}
+
+.inr{
+	float: right;
 	display: inline;
 }
 

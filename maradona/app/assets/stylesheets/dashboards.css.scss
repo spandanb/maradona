@@ -66,6 +66,16 @@ body{
 		border: solid 1px #C9C9C9;
 		padding: 10px 0;
 		margin: 10px 0 0 0;
+		
+		#header{
+			overflow: overlay;
+			background-color: #DADADA;
+			#text{
+				font-size: 24px;
+				padding-left: 20px;
+				/* margin: auto; */
+			}
+		}
 	}	
 }
 
@@ -94,6 +104,11 @@ body{
 
 .inl{
 	float: left;
+	display: inline;
+}
+
+.inr{
+	float: right;
 	display: inline;
 }
 
