@@ -2,9 +2,12 @@
 
 <h1>Listing Items for sale</h1>
 
-<%= javascript_include_tag :market %> <!--Does nothing --> 
+<%= javascript_include_tag :items_index %>
+<%= javascript_include_tag :market %>
 
 <%= link_to 'New Item', new_item_path %>
+
+<%= link_to_function "Greeting", "alert('Hello world!')", :class => "nav_link" %>
 
 <div id="item-list">
   <div class="header" >
@@ -23,14 +26,9 @@
 		  	<div class="item-col"><%= item.price %></div>
 		  	<div class="item-col">
 		  		<% if item.owner_id != current_user.id %>
-						
-						<%= link_to "Contact" + (item.user.profile.name if item.user.profile if item.user).to_s, 
-							new_item_item_response_path(@item, :format => :js), 
-							:remote => true, :id => 'new_item_response_link' %>
-						
-						<!--button id="contact-<%= counter %>" type="button" class="inline contact-button button-response-<%= counter %>">
-							Contact <%= item.user.profile.name.to_s if item.user.profile if item.user %>		    
-						</button-->
+						<button id="contact-<%= counter %>" type="button" class="inline contact-button button-response-<%= counter %>">
+							Contact <%= item.user.profile.name if item.user.profile if item.user %>		    
+						</button>
 					<% else %>
 						<div > <%= link_to 'Edit', edit_item_path(item) %> </div>
 					<% end %>
