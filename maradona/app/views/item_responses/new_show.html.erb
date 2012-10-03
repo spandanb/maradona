@@ -1,4 +1,5 @@
-<%= form_for(ItemResponse.new(item_id: params[:item_id], user_id: current_user.id)) do |f| %>
+<%= form_for(@item_response) do |f| %>
+<%# form_for(@item_response) do |f| %>
 	<div class="field" style="display:inline">
 		<%= f.hidden_field :user_id %>
 		<%= f.hidden_field :item_id %>

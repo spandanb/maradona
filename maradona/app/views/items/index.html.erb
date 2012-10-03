@@ -16,6 +16,8 @@
 	
 	<% @items.each do |item| %>
 		
+		<div id="resp-here"></div>
+		
 		<div class="item-wrapper zebra-<%= counter%2 %>">
 			
 			<div class ="top">
@@ -24,13 +26,13 @@
 		  	<div class="item-col">
 		  		<% if item.owner_id != current_user.id %>
 						
-						<%= link_to "Contact" + (item.user.profile.name if item.user.profile if item.user).to_s, 
-							new_item_item_response_path(@item, :format => :js), 
+						<%# link_to "Contact " + (item.user.profile.name if item.user.profile if item.user).to_s, 
+							new_item_response_path(:item_id => item.id, :format => :js), 
 							:remote => true, :id => 'new_item_response_link' %>
 						
-						<!--button id="contact-<%= counter %>" type="button" class="inline contact-button button-response-<%= counter %>">
-							Contact <%= item.user.profile.name.to_s if item.user.profile if item.user %>		    
-						</button-->
+						<%= link_to "new message", 
+						new_item_response_path(:item_id => item.id, :format => :js, :counter => counter.to_s), :remote => true, :id => 'new_item_response_link'<<counter.to_s %>
+												
 					<% else %>
 						<div > <%= link_to 'Edit', edit_item_path(item) %> </div>
 					<% end %>
@@ -46,14 +48,7 @@
 		   	<% end %>	  		
 		  </div>
 		
-			<div class="bottom">
-				<% if item.owner_id != current_user.id %>
-					<div id="response-form-<%= counter %>" class="response-form button-response-<%= counter %>" >
-						<%# render :partial => 'item_responses/form', :locals => { :item => item }%>
-						<%= render :file => 'item_responses/new', :locals => { :@item => item }%>
-					</div>
-				<% end %>
-			</div>	    
+			<div id="resp-field-area-<%= counter %>" class="bottom"> </div>	    
 		</div>
 		<% counter += 1	%>			
   <% end %>

@@ -1,0 +1,2 @@
+$('<div> <%= escape_javascript(render(:file => 'item_responses/new.html.erb', locals: {item: @item})) %> </div>').insertAfter('#resp-here'); 
+$('#new-resp-button').toggle();

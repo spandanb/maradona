@@ -2,6 +2,7 @@ class ItemResponsesController < ApplicationController
 
 	def create
 		@item_response = ItemResponse.new(params[:item_response])
+		#@item_response = ItemResponse.new
 =begin				
 		respond_to do |format|
       if @item_response.save
@@ -14,8 +15,8 @@ class ItemResponsesController < ApplicationController
 	end
 		
 	def new 	
-		@item = Item.find(params[:item_id]) #seems hacky
-		
+		#@item_response = ItemResponse.new(user_id: current_user.id, item_id: params[:item_id]) 		
+		@item_response = ItemResponse.new
 	end
 
 end

@@ -1,1 +1,13 @@
-<%= @item.inspect %>
+<%= form_for(ItemResponse.new(item_id: params[:item_id], user_id: current_user)) do |f| %>
+	<div class="field" style="display:inline">
+		<%= f.hidden_field :user_id %>
+		<%= f.hidden_field :item_id %>
+
+		<%= f.label :message %>
+		<%= f.text_area :message, :size => "30x1"%>
+
+	</div>
+	<div class="actions" style="display:inline">
+		<%= f.submit %>
+	</div>
+<% end %>
