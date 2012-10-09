@@ -4,7 +4,7 @@ li a{
 }
 
 #name-logo{
-	border-right: 1px solid #7ea29d;
+	border-right: 1px solid #363636;
 }
 
 a:link {
@@ -13,7 +13,7 @@ a:link {
 
 #nav a:active {
 	/* background:#e35a00; */
-	#color:#47635f; 
+	color:#47635f; 
 	font-weight: bolder;
 }
 
@@ -32,7 +32,7 @@ a:link {
 		li{
 			display: inline;
 			float: left;
-			padding: 10px 70px 10px 10px;
+			padding: 0px 70px 10px 10px;
 		}
 	}
 }

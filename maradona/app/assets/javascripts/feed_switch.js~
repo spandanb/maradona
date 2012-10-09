@@ -1,0 +1,9 @@
+$(document).ready(function() {
+	$('#groups').toggle()
+	
+	$('#index-item-information').bind('click', function(event){
+		$(document).find('#news').toggle();
+		
+	});
+		
+});

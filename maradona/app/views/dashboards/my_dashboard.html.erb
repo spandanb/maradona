@@ -1,16 +1,31 @@
 
-
 <%= stylesheet_link_tag "base" %>
+<%= stylesheet_link_tag "top_menu" %>
 <%= javascript_include_tag :move_arrow %>
+<%= javascript_include_tag :feed_switch %>
 
 <div id="static">
 	
-	<%= render 'shared/top_menu' %>
 
 	<div id="wooden-bar">
 		<form>
 			<input id="search-form" type="text" name="search" />
 		</form>
+	</div>
+
+	<div id="top-menu">
+		<nav id="nav">
+			<div id="list">
+				<ul id="list-nav">
+					<li id="name-logo"><a href="#">Minerwave</a></li>
+					<li><a href="/main" <%= 'id=selected-menu-button' if request.fullpath == '/main' %> >Home</a></li>
+					<li><a href="/marketplace">Marketplace</a></li>
+					<li><a href="/peers">Peers</a></li>
+					<li><a href="/groups">Groups</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+		</nav>
 	</div>
 
 	<div id="profile">	
@@ -33,62 +48,51 @@
 	</div>
 </div>
 
+<%=  %>
+
 <div id="dynamic">
-	<div id="feed">
-		<div id="top-bar">
-			<div id="news-text" class="inline float-left">
-				<span> News </span> <span> | </span>       
+	<div id="nav-item-index"> <!-- Left -->
+		<nav>
+			<div>
+				<ul>
+					<% for item in ['Activity', 'Information', 'Campus Connect', 'Mentions', 'Subscriptions', 
+													'Peers', 'Groups', 'My Events', 'Photos and Files'] %>
+						<li id="index-item-<%= item.downcase.tr(' ', '-') %>" class="left-nav-item">
+						 <!--a href="#"> <%= image_tag("check.png", alt: "", id: "check", :class=> "right-sidebar-menu-img") %>  <%= item %> </a-->
+						 	<%= image_tag("check.png", alt: "", id: "check", :class=> "right-sidebar-menu-img") %>  <%= item %>  
+						</li>
+					<% end %>
+				</ul>
+				<div id="arrow-wrapper" >
+					<div id="arrow-left"></div>
+					<div id="arrow-left2"></div>
+				</div>
 			</div>
-			<div id="post-bar" class="ym-gbox inline float-right">
+		</nav>
+	</div>
+	
+	<div id="feed"> <!-- Center --> 	
+		<div id="news"> <%= render 'my_dashboard' %> </div>
+		<div id="groups"> 
+			<% for group in @groups %>
+				<%= group.name %>
+			<% end %> 
+		</div>
+	</div>
+	
+	<div id="right-sidebar"><!-- Right -->		
+		<div id="post-bar" class="ym-gbox inline float-right">
 				<%= render 'shared/post_form' %>
-			</div>			
-		</div>		
-		<%= render 'my_dashboard' %>
-	</div>
-	
-	<div id="right-sidebar">
-		<div id="right-sidebar-menu">
-			<div class="inl right-sidebar-menu-item"> 
-				<%= image_tag("excl.png", alt: "", id: "excl", class: "right-sidebar-menu-img") %> 
-			</div>
-			<div class="inl right-sidebar-menu-item">				
-				<%= image_tag("check.png", alt: "", id: "check", :class=> "right-sidebar-menu-img") %> 
-			</div>
-			<div class="inl right-sidebar-menu-item"> 
-				<%= image_tag("four.png", alt: "", id: "four", class: "right-sidebar-menu-img") %> 
-			</div>
-			<div class="inl right-sidebar-menu-item"> 
-				<%= image_tag("thought.png", alt: "", id: "thought", class: "right-sidebar-menu-img") %> 
-			</div>
-			<div class="inl right-sidebar-menu-item"> 
-				<%= image_tag("note.png", alt: "", id: "note", class: "right-sidebar-menu-img") %>
-			</div>
-			<div class="inl right-sidebar-menu-item">
-				<%= image_tag("plus.png", :alt => "", id:"plus", class: "right-sidebar-menu-img") %>
-		  </div>
 		</div>
 		
-		<div id="arrow-up1" class="arrow-up"> </div>
-		<div id="arrow-up2" class="arrow-up"> </div> 
-		
-		<div class="ym-gbox">
-			<div class="divider">General </div>
+		<div id="interest-sidebar">
+			<div id="header">
+				<div id="text" class="inl"> YOUR INTERESTS </div>
+				<div class="inr">
+					<%= image_tag("plus.png", :alt => "", id:"plus2") %>
+				</div>
+			</div>
 		</div>
-		<div id="peer-request-wrapper" class="ym-gbox">
-			<%= render 'peer_requests' %>
-		</div>		
-		<div class="ym-gbox">
-			<div class="divider">Event Requests </div>
-		</div>		
-	</div>
-	
-	<div id="interest-sidebar">
-		<div id="header">
-			<div id="text" class="inl"> YOUR INTERESTS </div>
-			<div class="inr">
-				<%= image_tag("plus.png", :alt => "", id:"plus2") %>
-		  </div>
-	
 	</div>
 	
 </div>

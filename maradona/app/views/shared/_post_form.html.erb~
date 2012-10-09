@@ -1,9 +1,13 @@
 <%= form_for(@post) do |f| %>
-  <div class="field post-bar">
-    <%= f.text_area :content, placeholder: "Compose new post...", :size=>"50*1" %>
+  <div class="field post-form">
+    <%= f.text_area :content, placeholder: "Compose a new Post", :cols=>"40", :rows=> "10" %>
+  </div>
+  <div class="field tags-form">
+  	<textarea cols="40" id="post_content" name="post[content]" placeholder="Tags" rows="1"></textarea>
   </div>
   <%= f.hidden_field :other_users %>
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :reply_id %>
+  <%= f.hidden_field :group_id %>
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>

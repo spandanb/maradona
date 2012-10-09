@@ -49,9 +49,11 @@ class DashboardsController < ApplicationController
     @user = current_user    
     @profile = @user.profile    
     @posts = @user.posts.paginate(page: params[:page])
-    @posts = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"user_id\" = #{@user.id} OR \"posts\".\"other_users\" = #{@user.id.to_s} ORDER BY posts.created_at DESC") 
-    
+    @posts = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"user_id\" = #{@user.id} OR \"posts\".\"other_users\" = #{@user.id.to_s} ORDER BY posts.created_at DESC")     
     @post = current_user.posts.build# if logged_in?
+    
+    @groups = current_user.groups
+    
     @my_requests = PeerRequest.where(:to => @user.id)[0,6]
     
     respond_to do |format|
