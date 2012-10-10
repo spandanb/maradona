@@ -250,3 +250,29 @@ body{
 	}		
 }
 	
+
+#profile-button{
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #f0bc73) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #f0bc73 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#f0bc73');
+	background-color:#ededed;
+	border:1px solid #d4d4d4;
+	display:inline-block;
+	color:#696969;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 48px;
+	text-decoration:none;
+	float: right;
+	
+}#profile-button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f0bc73), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #f0bc73 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0bc73', endColorstr='#ededed');
+	background-color:#f0bc73;
+}#profile-button:active {
+	position:relative;
+	top:1px;
+}
+

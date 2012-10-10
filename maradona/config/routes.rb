@@ -19,6 +19,7 @@ Maradona::Application.routes.draw do
 	match 'reply_post' => "posts#reply"
 	match '/marketplace' => "items#index"
 	match 'peers' => "dashboards#peers_page"
+	match 'profile' => "dashboards#profile"
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -59,16 +59,29 @@ class DashboardsController < ApplicationController
     end
   end
   
+  def profile
+ 		@user = current_user
+ 		@posts = @user.posts.paginate(page: params[:page])
+    @posts = Post.find_by_sql("SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"user_id\" = #{@user.id} OR \"posts\".\"other_users\" = #{@user.id.to_s} ORDER BY posts.created_at DESC")    
+    @post = current_user.posts.build
+    
+ 		@information = ["Information"]
+    @interests = ["Interests"]
+    @campus_connect = ["Campus Connect"]
+    @mentions = ["Mentions"]
+    @subscriptions = ["subscriptions"]
+    @peers = {:peers => @user.peers, 
+    					:requests => PeerRequest.where(:to => @user.id), 
+    					:sent_requests => PeerRequest.where(:user_id => @user.id)}
+    @groups = @user.groups
+    @my_events = ["My Events"] 
+    @files = ["Photos and Files"]    	
+  end
+
+  
   def peers_page 
   	@user = current_user
-  	#The following can be optimized
   	@my_requests = PeerRequest.where(:to => @user.id)
-=begin  	
-  	.collect{|req| 
-  		{accept: PeerRequest.new(user_id: req.user_id, to: req.to, replied: true), 
-  		decline: PeerRequest.new(user_id: req.user_id, to: req.to, replied: false)}
-  	}
-=end
     @peers = Peership.get_peers(@user.id)
   	  	
   end

@@ -1,0 +1,105 @@
+
+<%= stylesheet_link_tag "base" %>
+<%# stylesheet_link_tag "top_menu" %>
+<%= stylesheet_link_tag "profile" %>
+<%= javascript_include_tag :move_arrow2 %>
+<%= javascript_include_tag :feed_switch %>
+
+<div id="static">
+	
+
+	<div id="wooden-bar">
+		<form>
+			<input id="search-form" type="text" name="search" />
+		</form>
+	</div>
+
+	<div id="top-menu">
+		<nav id="nav">
+			<div id="list">
+				<ul id="list-nav">
+					<li id="name-logo"><a href="#">Minerwave</a></li>
+					<li><a href="/main" <%= 'id=selected-menu-button' if request.fullpath == '/main' %> >Home</a></li>
+					<li><a href="/marketplace">Marketplace</a></li>
+					<li><a href="/peers">Peers</a></li>
+					<li><a href="/groups">Groups</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div id="profile">	
+		<div class="ym-cbox float-left inline">
+			<img id="profile-pic" src="sil.png" alt="profile img" height="105" width="105" />
+		</div>
+	
+		<div class="ym-cbox">
+			<div class="normal"><%= @user.email %></div>
+			<% if @profile %>
+				<div class="large"><%= @profile.name %></div>
+				<div ><%= @profile.honours %></div>
+				<div class="small"><%= @profile.department %></div>
+				<div>
+					<span><%= @profile.institution %></span>
+					<span class="small">(Class of <%= @profile.class_of %>)</span>
+				</div>
+			<% end %>		
+		</div>
+	</div>
+</div>
+
+<%=  %>
+
+<div id="dynamic">
+	<div id="nav-item-index"> <!-- Left -->
+		<nav>
+			<div>
+				<ul>
+					<% for item in ['Activity', 'Information', 'Campus Connect', 'Mentions', 'Subscriptions', 
+													'Peers', 'Groups', 'My Events', 'Photos and Files'] %>
+						<li id="index-item-<%= item.downcase.tr(' ', '-') %>" class="left-nav-item">
+						 <!--a href="#"> <%= image_tag("check.png", alt: "", id: "check", :class=> "right-sidebar-menu-img") %>  <%= item %> </a-->
+						 	<%= image_tag("check.png", alt: "", id: "check", :class=> "right-sidebar-menu-img") %>  <%= item %>  
+						</li>
+					<% end %>
+				</ul>
+				<div id="arrow-wrapper" >
+					<div id="arrow-left"></div>
+					<div id="arrow-left2"></div>
+				</div>
+			</div>
+		</nav>
+	</div>
+	
+	<div id="feed"> <!-- Center --> 	
+		<div id="news"> <%= render 'my_dashboard' %> </div>
+		<div id="groups"> 
+			<% for group in @groups %>
+				<%= group.name %>
+			<% end %> 
+		</div>
+	</div>
+	
+	<div id="right-sidebar"><!-- Right -->		
+		<div id="post-bar" class="ym-gbox inline float-right">
+				<%= render 'shared/post_form' %>
+		</div>
+		
+		<div id="interest-sidebar">
+			<div id="header">
+				<div id="text" class="inl"> YOUR INTERESTS </div>
+				<div class="inr">
+					<%= image_tag("plus.png", :alt => "", id:"plus2") %>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+
+
+
+

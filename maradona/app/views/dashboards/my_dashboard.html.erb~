@@ -10,6 +10,7 @@
 	<div id="wooden-bar">
 		<form>
 			<input id="search-form" type="text" name="search" />
+			<a href="/profile" id=""> Profile </a>
 		</form>
 	</div>
 
@@ -84,7 +85,7 @@
 	
 	<div id="interest-sidebar">
 		<div id="header">
-			<div id="text" class="inl"> Your Interests </div>
+			<div id="text" class="inl"> YOUR INTERESTS </div>
 			<div class="inr">
 				<%= image_tag("plus.png", :alt => "", id:"plus2") %>
 		  </div>
